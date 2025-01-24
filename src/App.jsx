@@ -1,4 +1,13 @@
 import { useState } from "react";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader,
+} from "@/components/ui/sidebar";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
@@ -164,26 +173,41 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-center text-red-700">
-        Hello world!
-      </h1>
+      <SidebarProvider>
+        <Sidebar>
+          <SidebarHeader />
+          <SidebarContent>
+            <SidebarGroup />
+            <SidebarGroup />
+          </SidebarContent>
+          <SidebarFooter />
+        </Sidebar>
+        <main className="bg-red-950 w-full">
+          <SidebarTrigger />
+          <h1 className="text-3xl font-bold underline text-center text-red-700">
+            Hello world!
+          </h1>
 
-      <div className="flex">
-        <DndContext
-          announcements={defaultAnnouncements}
-          sensors={sensors}
-          collisionDetection={closestCorners}
-          onDragStart={handleDragStart}
-          onDragOver={handleDragOver}
-          onDragEnd={handleDragEnd}
-        >
-          <Container id="root" items={items.root} />
-          <Container id="container1" items={items.container1} />
-          <Container id="container2" items={items.container2} />
-          <Container id="container3" items={items.container3} />
-          <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay>
-        </DndContext>
-      </div>
+          <div className="flex">
+            <DndContext
+              announcements={defaultAnnouncements}
+              sensors={sensors}
+              collisionDetection={closestCorners}
+              onDragStart={handleDragStart}
+              onDragOver={handleDragOver}
+              onDragEnd={handleDragEnd}
+            >
+              <Container id="root" items={items.root} />
+              <Container id="container1" items={items.container1} />
+              <Container id="container2" items={items.container2} />
+              <Container id="container3" items={items.container3} />
+              <DragOverlay>
+                {activeId ? <Item id={activeId} /> : null}
+              </DragOverlay>
+            </DndContext>
+          </div>
+        </main>
+      </SidebarProvider>
     </>
   );
 }
