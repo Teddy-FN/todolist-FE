@@ -1,10 +1,8 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Item = (props) => {
-  const { id } = props;
-
+export const Item = ({ id }) => {
   const style = {
     width: "100%",
     height: 50,
@@ -19,9 +17,9 @@ export const Item = (props) => {
   return <div style={style}>{id}</div>;
 };
 
-export const SortableItem = (props) => {
+export const SortableItem = ({ id }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: props.id });
+    useSortable({ id: id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -30,7 +28,7 @@ export const SortableItem = (props) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Item id={props.id} />
+      <Item id={id} />
     </div>
   );
 };
